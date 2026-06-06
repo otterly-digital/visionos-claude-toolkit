@@ -1,6 +1,7 @@
-# Otterly Digital - visionOS Developer Toolkit
+# Otterly Digital - visionOS <> Claude Developer Toolkit
 
-A set of shell scripts that close the log-streaming gap in Vision Pro development and wire directly into Claude Code's Monitor tool — giving you an AI-assisted build-deploy-debug loop where Claude watches your logs, reads the context around each error, and proposes fixes without you leaving your editor. Built and maintained by [Otterly Digital](https://otterlydigital.com).
+A set of shell scripts that close the log-streaming gap in Vision Pro development and wire directly into Claude Code's Monitor tool — giving you an AI-assisted build-deploy-debug loop where Claude watches your logs, reads the context around each error, and proposes fixes without you leaving your editor. 
+Built and maintained by [Otterly Digital](https://otterly.digital).
 
 ---
 

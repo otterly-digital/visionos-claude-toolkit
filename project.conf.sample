@@ -1,0 +1,9 @@
+# ─── Otterly Digital - visionOS Developer Toolkit ───────────────────────────
+APP_NAME="YourApp"                      # Must match your Xcode scheme exactly
+BUNDLE_ID="com.yourcompany.yourapp"     # CFBundleIdentifier from Info.plist
+XCODE_PROJECT="YourApp.xcodeproj"       # .xcodeproj filename (repo-root relative)
+# XCODE_WORKSPACE="YourApp.xcworkspace" # Uncomment if using CocoaPods/SPM workspace
+
+# Space-separated log tags to highlight in device/sim output.
+# Example: LOG_TAGS="[net] [auth] [render]"
+LOG_TAGS=""

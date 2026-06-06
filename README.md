@@ -46,7 +46,7 @@ The result is a tight loop: edit code → `./Scripts/deploy.sh` → Claude sees 
 ```
 YourApp/
   YourApp.xcodeproj
-  project.conf          ← you'll create this
+  project.conf          ← copied and renamed from project.conf.sample
   Scripts/
     deploy.sh
     watch-device.sh
@@ -57,21 +57,9 @@ YourApp/
 
 ### 2. Create `project.conf` at your repo root
 
-Copy the template below and fill in your values:
+Copy `project.conf.sample` from this repo to your project root, rename it `project.conf`, and fill in your values.
 
-```bash
-# ─── Otterly Digital - visionOS Developer Toolkit ───────────────────────────
-APP_NAME="YourApp"                      # Must match your Xcode scheme exactly
-BUNDLE_ID="com.yourcompany.yourapp"     # CFBundleIdentifier from Info.plist
-XCODE_PROJECT="YourApp.xcodeproj"       # .xcodeproj filename (repo-root relative)
-# XCODE_WORKSPACE="YourApp.xcworkspace" # Uncomment if using CocoaPods/SPM workspace
-
-# Space-separated log tags to highlight in device/sim output.
-# Example: LOG_TAGS="[net] [auth] [render]"
-LOG_TAGS=""
-```
-
-Commit `project.conf` - it contains no secrets and every team member needs it.
+Commit `project.conf` — it contains no secrets and every team member needs it.
 
 ### 3. Add the Claude Code instructions
 

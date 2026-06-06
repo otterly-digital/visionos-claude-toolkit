@@ -1,6 +1,6 @@
 # Otterly Digital - visionOS Developer Toolkit
 
-A set of shell scripts that dramatically tighten the build-deploy-debug loop for visionOS apps on Apple Vision Pro. Built and maintained by [Otterly Digital](https://otterlydigital.com).
+A set of shell scripts that close the log-streaming gap in Vision Pro development and wire directly into Claude Code's Monitor tool — giving you an AI-assisted build-deploy-debug loop where Claude watches your logs, reads the context around each error, and proposes fixes without you leaving your editor. Built and maintained by [Otterly Digital](https://otterlydigital.com).
 
 ---
 
@@ -15,7 +15,7 @@ These scripts close that gap. You get:
 - **Noise-filtered output** that suppresses Xcode's wall of build chatter and shows only errors, warnings, and your custom log tags.
 - **Simulator parity** so the same tag-based filtering works whether you're testing on device or in the sim.
 
-The result is a tight loop: edit code → `./Scripts/deploy.sh` → see logs appear in the already-running monitor terminal within ~3 seconds, no Xcode window switching required.
+The result is a tight loop: edit code → `./Scripts/deploy.sh` → Claude sees the filtered log output within ~3 seconds, reads the surrounding source context, and either proposes a fix inline or drops into plan mode for non-trivial changes — no Xcode window switching, no terminal spelunking required.
 
 ---
 
@@ -73,13 +73,17 @@ LOG_TAGS=""
 
 Commit `project.conf` - it contains no secrets and every team member needs it.
 
-### 3. Make the scripts executable
+### 3. Add the Claude Code instructions
+
+Copy [CLAUDE.md](https://github.com/otterlydigital/visionos-tools/blob/main/CLAUDE.md) from this repo into your project root. It teaches Claude Code to invoke the watch scripts via its built-in Monitor tool whenever you ask it to watch the build, sim, or device — and how to react to what it sees.
+
+### 4. Make the scripts executable
 
 ```bash
 chmod +x Scripts/*.sh
 ```
 
-### 4. Pair your Vision Pro
+### 5. Pair your Vision Pro
 
 In Xcode: **Window → Devices and Simulators**, then connect Vision Pro to the same Wi-Fi network and follow the pairing flow. The scripts auto-detect the first paired device; no UUID configuration needed unless you have multiple devices.
 
@@ -87,7 +91,23 @@ In Xcode: **Window → Devices and Simulators**, then connect Vision Pro to the 
 
 ## Usage
 
-### Typical device workflow
+### With Claude Code (recommended)
+
+With `CLAUDE.md` in your project root, Claude Code handles the monitoring for you. Just tell it what to watch:
+
+> "Watch the device" / "Watch the sim" / "Watch the build"
+
+Claude invokes the matching script via its Monitor tool with `persistent: true`. From that point:
+
+- **Each filtered log line** (errors, faults, your `LOG_TAGS`) arrives as a notification that wakes Claude mid-session.
+- **On an error or fault** — Claude reads ±20 lines of source context around the referenced file and line number, then either proposes a fix inline or enters plan mode for non-trivial changes.
+- **On `** BUILD SUCCEEDED` / `** TEST SUCCEEDED`** — Claude acknowledges and stands down.
+
+You stay in your editor. Run `./Scripts/deploy.sh` after each change and Claude reports back.
+
+---
+
+### Manual workflow
 
 Open two terminals at your repo root.
 

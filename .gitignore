@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Xcode (if any tooling is added later)
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+DerivedData/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local config (users create this in their own repos, not here)
+project.conf
